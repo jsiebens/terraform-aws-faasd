@@ -38,14 +38,16 @@ variable "subnet_id" {
   type        = string
 }
 
-variable "aws_instance" {
+variable "instance_type" {
   description = "The instance type to use for the instance."
   type        = string
-  default     = "t2.small"
+  default     = "t2.micro"
 }
+
 variable "key_name" {
   description = "Key name of the Key Pair to use for the instance."
   type        = string
+  default     = null
 }
 
 variable "tags" {

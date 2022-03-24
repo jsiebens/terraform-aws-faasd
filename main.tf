@@ -50,16 +50,6 @@ resource "aws_security_group" "faasd" {
     }
   }
 
-  ingress {
-    cidr_blocks = [
-      "0.0.0.0/0"
-    ]
-    from_port = 22
-    to_port   = 22
-    protocol  = "tcp"
-  }
-
-  // Terraform removes the default rule
   egress {
     from_port   = 0
     to_port     = 0
@@ -75,9 +65,40 @@ resource "aws_security_group" "faasd" {
   )
 }
 
+resource "aws_iam_role" "faasd" {
+  name               = var.name
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": "ec2.amazonaws.com"
+      },
+      "Effect": "Allow",
+      "Sid": ""
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_instance_profile" "faasd" {
+  name = var.name
+  role = aws_iam_role.faasd.id
+}
+
+resource "aws_iam_policy_attachment" "faasd" {
+  name       = format("%s-attachment", var.name)
+  roles      = [aws_iam_role.faasd.id]
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+}
+
 resource "aws_instance" "faasd" {
   ami                    = data.aws_ami.ubuntu.id
-  instance_type          = "t2.micro"
+  instance_type          = var.instance_type
+  iam_instance_profile   = aws_iam_instance_profile.faasd.id
   user_data_base64       = base64encode(templatefile("${path.module}/templates/startup.sh", local.user_data_vars))
   key_name               = var.key_name
   vpc_security_group_ids = [aws_security_group.faasd.id]

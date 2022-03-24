@@ -48,6 +48,9 @@ module "faasd" {
 |------|------|
 | [aws_eip.faasd](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip) | resource |
 | [aws_eip_association.faasd](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip_association) | resource |
+| [aws_iam_instance_profile.faasd](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_instance_profile) | resource |
+| [aws_iam_policy_attachment.faasd](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy_attachment) | resource |
+| [aws_iam_role.faasd](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_instance.faasd](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance) | resource |
 | [aws_security_group.faasd](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
 | [random_password.faasd](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
@@ -57,12 +60,12 @@ module "faasd" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| aws\_instance | The instance type to use for the instance. | `string` | `"t2.small"` | no |
 | basic\_auth\_password | The basic auth password, if left empty, a random password is generated. | `string` | `null` | no |
 | basic\_auth\_user | The basic auth user name. | `string` | `"admin"` | no |
 | domain | A public domain for the faasd instance. This will the use of Caddy and a Let's Encrypt certificate | `string` | `""` | no |
 | email | Email used to order a certificate from Let's Encrypt | `string` | `""` | no |
-| key\_name | Key name of the Key Pair to use for the instance. | `string` | n/a | yes |
+| instance\_type | The instance type to use for the instance. | `string` | `"t2.micro"` | no |
+| key\_name | Key name of the Key Pair to use for the instance. | `string` | `null` | no |
 | name | The name of the faasd instance. | `string` | n/a | yes |
 | subnet\_id | VPC Subnet ID to launch in. | `string` | n/a | yes |
 | tags | A map of tags to assign to the resource. | `map(string)` | `{}` | no |
@@ -80,8 +83,8 @@ module "faasd" {
 
 ## See Also
 
-- [faasd on Google Cloud Platform](https://github.com/jsiebens/terraform-google-faasd)
-- [faasd on AWS](https://github.com/jsiebens/terraform-aws-faasd)
-- [faasd on Microsoft Azure](https://github.com/jsiebens/terraform-azurerm-faasd)
-- [faasd on DigitalOcean](https://github.com/jsiebens/terraform-digitalocean-faasd)
-- [faasd on Equinix Metal](https://github.com/jsiebens/terraform-equinix-faasd)
+- [faasd on Google Cloud Platform with Terraform](https://github.com/jsiebens/terraform-google-faasd)
+- [faasd on Microsoft Azure with Terraform](https://github.com/jsiebens/terraform-azurerm-faasd)
+- [faasd on DigitalOcean with Terraform](https://github.com/jsiebens/terraform-digitalocean-faasd)
+- [faasd on Equinix Metal with Terraform](https://github.com/jsiebens/terraform-equinix-faasd)
+- [faasd on Scaleway with Terraform](https://github.com/jsiebens/terraform-scaleway-faasd)
