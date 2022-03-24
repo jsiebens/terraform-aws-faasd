@@ -83,6 +83,7 @@ module "faasd" {
 
 ## See Also
 
+- [faasd on Amazon Web Services with Terraform](https://github.com/jsiebens/terraform-aws-faasd)
 - [faasd on Google Cloud Platform with Terraform](https://github.com/jsiebens/terraform-google-faasd)
 - [faasd on Microsoft Azure with Terraform](https://github.com/jsiebens/terraform-azurerm-faasd)
 - [faasd on DigitalOcean with Terraform](https://github.com/jsiebens/terraform-digitalocean-faasd)
