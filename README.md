@@ -1,4 +1,4 @@
-# faasd for AWS
+# faasd for Amazon Web Services
 
 This repo contains a Terraform Module for how to deploy a [faasd](https://github.com/openfaas/faasd) instance on the
 [AWS](https://aws.amazon.com/) using [Terraform](https://www.terraform.io/).
